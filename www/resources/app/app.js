@@ -2709,6 +2709,7 @@ const app = new Framework7({
                 };
                 self.request.promise.post(API_URL.URL_REFRESH_TOKEN, data, 'json')
                     .then(function (result) {
+                        console.log(result)
                         if(result.data.MajorCode === '000') {
 
                         }
