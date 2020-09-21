@@ -744,6 +744,7 @@
 
                 $$('#AssetImageInput').on('change', function(){
                     let noError = 1;
+                    console.log(this)
                     let file = this.files[0];
                     let maxFileSize = 5; // in MB
                     if (file) {

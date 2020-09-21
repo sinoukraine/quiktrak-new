@@ -65,6 +65,8 @@
     --f7-searchbar-input-extra-padding-left: 15px;
     --f7-searchbar-input-border-radius: 8px;
     --f7-searchbar-bg-color: #F2F2F2;
+
+    --f7-panel-backdrop-bg-color: rgba(0,0,0,.3)
 }
 .fab[class*="-bottom2"] {
     bottom: calc(var(--f7-fab-margin2) + var(--f7-safe-area-bottom));

@@ -195,7 +195,9 @@ const app = new Framework7({
             this.progressbar.show('custom');
         },
         routerAjaxComplete: function () {
-            this.progressbar.hide();
+            this.utils.nextTick(()=>{
+                this.progressbar.hide();
+            });
         },
         connection: function(isOnline){
             let self = this;
@@ -416,7 +418,8 @@ const app = new Framework7({
             };
             self.request.promise.get(API_URL.LOGOUT, data, 'json')
                 .then(function (result) {
-                    //console.log(result);
+                    console.log('logged out')
+                    console.log(result);
                 });
 
             self.utils.nextTick(()=>{
@@ -431,8 +434,8 @@ const app = new Framework7({
                 $$("input[name='username']").val(localStorage.ACCOUNT);
             }
 
-
             self.methods.clearUserInfo();
+            self.methods.unregisterPush();
             self.loginScreen.open('.login-screen');
 
         },
@@ -580,7 +583,7 @@ const app = new Framework7({
                     if (!update) {
                         self.dialog.close();
                         LoginEvents.emit('signedIn', assetList);
-                        self.methods.afterLogin();
+                        self.methods.afterLogin(assetList);
                     }
                     if (callback instanceof Function) {
                         callback();
@@ -596,17 +599,31 @@ const app = new Framework7({
                     }*/
                 });
         },
-        afterLogin: function(){
+        afterLogin: function(assetList){
             let self = this;
             setTimeout(function() {
                 let additionalFlags = self.methods.getFromStorage('additionalFlags');
-                if(!additionalFlags.importantNoticeSimIssue){
-                    self.methods.showImportantNotice({
-                        title: LANGUAGE.PROMPT_MSG119,
-                        text: LANGUAGE.PROMPT_MSG118,
-                        flagName: 'importantNoticeSimIssue',
-                    });
-                }else if(!additionalFlags.modalReview && additionalFlags.firstLoginDone){
+                /*if(!additionalFlags.importantNoticeSimIssue){
+                    let datamogSim = false;
+                    //let datamogPattern = /^42|^43/i;
+                    let datamogPattern = /^423/i;
+                    for (let i = 0; i < assetList.length; i++) {
+                        if(assetList[i].SolutionType !== 'Protect' && assetList[i].IMSI && datamogPattern.test(assetList[i].IMSI)){
+                            datamogSim = true;
+                            break;
+                        }
+                    }
+                    if(datamogSim){
+                        self.methods.showImportantNotice({
+                            title: LANGUAGE.PROMPT_MSG119,
+                            text: LANGUAGE.PROMPT_MSG118,
+                            flagName: 'importantNoticeSimIssue',
+                        });
+                    }else{
+                        additionalFlags.importantNoticeSimIssue = true;
+                    }
+
+                }else*/ if(!additionalFlags.modalReview && additionalFlags.firstLoginDone){
                     self.methods.showAskForReview();
                 }
 
