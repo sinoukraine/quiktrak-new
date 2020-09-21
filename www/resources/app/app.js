@@ -459,6 +459,8 @@ const app = new Framework7({
                 deviceType: localStorage.DEVICE_TYPE,
             };
 
+            concosle.log(data)
+
             self.dialog.progress(LANGUAGE.COM_MSG004,'red');
             self.request.promise.get(API_URL.LOGIN, data, 'json')
                 .then(function (result) {
@@ -2707,6 +2709,7 @@ const app = new Framework7({
                     MobileToken: localStorage.PUSH_MOBILE_TOKEN,
                     DeviceToken: newDeviceToken,
                 };
+                concosle.log(data)
                 self.request.promise.post(API_URL.URL_REFRESH_TOKEN, data, 'json')
                     .then(function (result) {
                         console.log(result)
