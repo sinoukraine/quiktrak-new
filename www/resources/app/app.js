@@ -354,9 +354,12 @@ const app = new Framework7({
         getPlusInfo: function () {
             let self = this;
             let uid = this.methods.guid();
+
             if (window.device) {
                 if (!localStorage.PUSH_MOBILE_TOKEN) {
                     localStorage.PUSH_MOBILE_TOKEN = uid;
+                }if (!localStorage.PUSH_DEVICE_TOKEN) {
+                    localStorage.PUSH_DEVICE_TOKEN = uid;
                 }
                 localStorage.PUSH_APP_KEY = BuildInfo.packageName;
                 localStorage.PUSH_APPID_ID = BuildInfo.packageName;
