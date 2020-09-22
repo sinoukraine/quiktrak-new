@@ -461,7 +461,7 @@ const app = new Framework7({
                 deviceToken: localStorage.PUSH_DEVICE_TOKEN,
                 deviceType: localStorage.DEVICE_TYPE,
             };
-
+            console.log('login')
             console.log(data)
 
             self.dialog.progress(LANGUAGE.COM_MSG004,'red');
@@ -2693,7 +2693,7 @@ const app = new Framework7({
                 push.unregister(
                     () => {
                        // alert('unregistered');
-                        console.log('success');
+                        console.log('push unregister - success');
                     },
                     () => {
                        // alert('fail to unregister');
