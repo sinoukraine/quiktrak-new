@@ -461,8 +461,8 @@ const app = new Framework7({
                 deviceToken: localStorage.PUSH_DEVICE_TOKEN,
                 deviceType: localStorage.DEVICE_TYPE,
             };
-            console.log('login')
-            console.log(data)
+            /*console.log('login')
+            console.log(data)*/
 
             self.dialog.progress(LANGUAGE.COM_MSG004,'red');
             self.request.promise.get(API_URL.LOGIN, data, 'json')
