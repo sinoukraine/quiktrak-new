@@ -499,6 +499,12 @@ const app = new Framework7({
                             self.methods.getAssetListPosInfo(assetListObj, 1);  // '1' - means update
                         }, 30*1000);
 
+                        if(self.data.AccountSolutionArray.indexOf('protect') > -1 || self.data.AccountSolutionArray.indexOf('witiprotect') > -1){
+                            setTimeout(function () {
+                                self.methods.checkIsLowBalance(result.data.Data.UserInfo.SMSTimes);
+                            }, 2000)
+                        }
+
                         self.utils.nextFrame(()=>{
                             self.methods.getAssetListPosInfo(assetListObj);
                             self.loginScreen.close();
@@ -1478,7 +1484,13 @@ const app = new Framework7({
 
                         if (alert) {
                             self.methods.customDialog({text: LANGUAGE.COM_MSG003+': '+result.data.Data.SMSTimes});
+                        }else{
+                            setTimeout(function () {
+                                self.methods.checkIsLowBalance(result.data.Data.SMSTimes);
+                            }, 1000)
                         }
+
+
                     }
                     self.progressbar.hide();
                 })
@@ -1491,6 +1503,44 @@ const app = new Framework7({
                         self.dialog.alert(LANGUAGE.PROMPT_MSG003);
                     }
                 });
+        },
+        checkIsLowBalance(credits){
+            if (credits > 6) {
+                return;
+            }
+
+            let self = this;
+            let modalTex = `
+            <div class="custom-modal-title text-color-red">${ LANGUAGE.PROMPT_MSG121 }</div>
+            <div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG122 }</div>
+            <div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG123 }</div>
+            <div class="custom-modal-text">${ LANGUAGE.COM_MSG003 }: <span class="text-color-red font-weight-bold">${credits}</span></div>
+            `;
+            if(credits < 2){
+                modalTex = `
+                <div class="custom-modal-title text-color-red">${ LANGUAGE.PROMPT_MSG124 }</div>
+                <div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG125 }</div>
+                <div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG123 }</div>                
+            `;
+            }
+
+
+
+            self.dialog.create({
+                title: `<div class="custom-modal-logo-wrapper"><img class="custom-modal-logo" src="${ self.data.logoBlack }" alt=""/></div>`,
+                text: modalTex,
+                buttons: [
+                    {
+                        text: LANGUAGE.COM_MSG068,
+                    },
+                    {
+                        text: LANGUAGE.COM_MSG067,
+                        onClick: function () {
+                            mainView.router.navigate('/recharge-credits/');
+                        }
+                    },
+                ]
+            }).open();
         },
         getPlaybackFilterEventsList: function(){
             return [
@@ -2434,7 +2484,7 @@ const app = new Framework7({
                         text: LANGUAGE.COM_MSG055,
                         //bold: true,
                         onClick: function () {
-                            mainView.router.navigate('/credit-recharge/');
+                            mainView.router.navigate('/recharge-credits/');
                         }
                     },
                 ]

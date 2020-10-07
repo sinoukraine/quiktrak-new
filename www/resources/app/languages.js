@@ -117,6 +117,8 @@ window.LanguagePackages= {
 		"COM_MSG111": "Daily",
 		"COM_MSG112": "Monthly",
 		"COM_MSG113": "Type",
+		"COM_MSG114": "Send",
+		"COM_MSG115": "Unlock",
 
 		"PROMPT_MSG000": "Nothing found",
 		"PROMPT_MSG001": "The login(email) or password you entered is incorrect.",
@@ -243,6 +245,14 @@ window.LanguagePackages= {
 		"PROMPT_MSG117": "Invalid Custom Email",
 		"PROMPT_MSG118": "Quiktrak has been made aware of a failure within one of our sim providers services and portal that has impacted some services in certain sim ranges. Our support staff are working hard to establish an impacted client list and to make contact to arrange an on-site technician visit.</br>If you notice any assets in your account that are not functioning correctly please email <a href='mailto:support@quiktrak.com.au' target='_blank' class='external color-red'>support@quiktrak.com.au</a> with your account name, contact number and location to help expedite the restoration process.</br>We appreciate your understanding and patience.",
 		"PROMPT_MSG119": "IMPORTANT ANNOUNCEMENT",
+		"PROMPT_MSG120": "Locate and Immobilise - Update current location and Immobilise ",
+		"PROMPT_MSG121": "Low credit warning.",
+		"PROMPT_MSG122": "You must recharge to continue to receive alarms for assets with Protect and Loc8 solutions.",
+		"PROMPT_MSG123": "Recharge now?",
+		"PROMPT_MSG124": "All alarms for assets with Protect and Loc8 solutions type are disabled",
+		"PROMPT_MSG125": "To renew alarms you must recharge and re enable alarms",
+		"PROMPT_MSG126": "Command Sent",
+
 		"HOME_MSG00": "Home",
 		"HOME_MSG01": "All",
 		"HOME_MSG02": "View All",
@@ -404,6 +414,7 @@ window.LanguagePackages= {
 		"ASSET_STATUS_LIVE_MSG06": "Lock Door",
 		"ASSET_STATUS_LIVE_MSG07": "Report Theft",
 		"ASSET_STATUS_LIVE_MSG08": "WiTi",
+		"ASSET_STATUS_LIVE_MSG09": "Unlock Door",
 
 		"REPORT_THEFT_MSG00": "Please follow the below steps when reporting your stolen asset.",
 		"REPORT_THEFT_MSG01": "1. Contact police to report the incident. You will be provided with an incident report number.",
@@ -498,6 +509,7 @@ window.LanguagePackages= {
 		"ASSET_PROTECT_MSG00": "Position",
 		"ASSET_PROTECT_MSG01": "Upgrade to Live",
 		"ASSET_PROTECT_MSG02": "Alarm Settings",
+		"ASSET_PROTECT_MSG03": "Locate and Immobilise",
 
 		"ALARM_LOG_MSG00": "Alarm Log",
 

@@ -105,17 +105,32 @@
                     </li>
                     {{/if}}
                     {{#if IsLockDoorSupported}}
-                    <li class="item-content">
+                    <!--<li class="item-content">
                         <div class="item-media {{#if LockDoor}} text-color-red {{else}} text-color-lightgray {{/if}}">
                             <i class="f7-icons icon-live-lock-door"></i>
                         </div>
                         <div class="item-inner">
-                            <div class="item-title tooltip-init" data-trigger="click" data-tooltip="{{@global.LANGUAGE.PROMPT_MSG006}}">{{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG06}}  <span class="badge color-lightblue">?</span></div>
+                            <div class="item-title tooltip-init" data-trigger="click" data-tooltip="{{@global.LANGUAGE.PROMPT_MSG006}}">{{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG09}}  <span class="badge color-lightblue">?</span></div>
                             <div class="item-after">
                                 <label class="toggle color-green toggle-LockDoor">
                                     <input type="checkbox" name="LockDoor" {{#if LockDoor}} checked {{/if}}>
                                     <span class="toggle-icon"></span>
                                 </label>
+                            </div>
+                        </div>
+                    </li>-->
+                    <li class="item-content">
+                        <div class="item-media text-color-lightgray">
+                            <i class="f7-icons icon-live-lock-door"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">{{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG09}}</div>
+                            <div class="item-after min-width-122">
+                                <!--<label class="toggle color-green toggle-LockDoor">
+                                    <input type="checkbox" name="LockDoor" {{#if LockDoor}} checked {{/if}}>
+                                    <span class="toggle-icon"></span>
+                                </label>-->
+                                <a href="#" class=" width-100 button button-fill color-darkgray" @click="unlockDoor">{{@global.LANGUAGE.COM_MSG114}}</a>
                             </div>
                         </div>
                     </li>
@@ -431,6 +446,52 @@
                         input.prop('checked', params.state);
                     }
                 }
+            },
+            unlockDoor: function(e){
+                let self = this;
+                let $el = $$(e.target);
+                let data = {
+                    MajorToken: self.$root.MajorToken,
+                    MinorToken: self.$root.MinorToken,
+                    code: self.Id,
+                    state: 'unlock', //'lock';
+                };
+
+                $el.addClass('disabled');
+                self.$app.progressbar.show('custom');
+                self.$app.request.promise.get( API_URL.SET_DOORLOCK, data, 'json')
+                  .then(function (result) {
+                      if (result.data && result.data.MajorCode === '000') {
+                          self.$app.methods.customNotification({text: LANGUAGE.PROMPT_MSG126});
+                          self.$app.methods.checkBalance();
+
+                      }else if(result.data && result.data.MajorCode === '200' && result.data.MinorCode === '1003'){
+                          self.$app.methods.customDialog({title: LANGUAGE.PROMPT_MSG039, text: LANGUAGE.PROMPT_MSG040});
+
+                      }else if(result.data && result.data.MajorCode === '100' && result.data.MinorCode === '1003'){
+                          self.$app.methods.customDialog({title: LANGUAGE.PROMPT_MSG039, text: LANGUAGE.PROMPT_MSG040});
+
+                      }else if(result.data && result.data.MajorCode === '100' && result.data.MinorCode === '0000'){
+                          self.$app.methods.customDialog({title: params.imei, text: LANGUAGE.PROMPT_MSG085});
+
+                      }else{
+                          self.$app.dialog.alert(LANGUAGE.PROMPT_MSG023 + `<br>MajorCode: ${result.data.MajorCode}<br>MinorCode: ${result.data.MinorCode}<br>${result.data.Data}`);
+                      }
+                  })
+                  .finally(function () {
+                      self.$app.utils.nextFrame(()=>{
+                          $el.removeClass('disabled');
+                          self.$app.progressbar.hide();
+                      });
+                  })
+                  .catch(function (err) {
+                      console.log(err);
+                      if (err && err.status === 404){
+                          self.$app.dialog.alert(LANGUAGE.PROMPT_MSG002);
+                      }else{
+                          self.$app.dialog.alert(LANGUAGE.PROMPT_MSG003);
+                      }
+                  });
             }
 
         },

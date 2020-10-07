@@ -104,8 +104,21 @@
                             </div>
                         </div>
                     </li>
+                    <li class="item-content">
+                        <div class="item-media text-color-lightgray ">
+                            <i class="f7-icons icon-locimmob"></i>
+                        </div>
+                        <div class="item-inner">
+                            <div class="item-title">{{@global.LANGUAGE.ASSET_PROTECT_MSG03}}</div>
+                            <div class="item-after display-flex align-items-center">
+                                <span class="badge color-lightblue margin-right-half tooltip-init" data-tooltip="{{@global.LANGUAGE.PROMPT_MSG120}}">?</span>
+                                <div class="min-width-122">
+                                    <button @click="changeState" data-name="Immobilise" data-state="true" data-command="locate" class="button button-fill color-custom ">{{@global.LANGUAGE.COM_MSG114}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     {{/if}}
-
                 {{/if}}
 
                 <li class="item-content">
@@ -115,7 +128,7 @@
                     <div class="item-inner">
                         <div class="item-title">{{@global.LANGUAGE.ASSET_PROTECT_MSG02}}</div>
                         <div class="item-after min-width-122">
-                            <a href="/asset-alarm/?imei={{IMEI}}" class=" width-100 button button-fill color-custom">{{@global.LANGUAGE.COM_MSG048}}</a>
+                            <a href="/asset-alarm/?imei={{IMEI}}" class=" width-100 button button-fill color-custom">{{@global.LANGUAGE.COM_MSG114}}</a>
                         </div>
                     </div>
                 </li>
@@ -143,6 +156,7 @@
             let ret = {
                 Name: asset.Name,
                 IMEI: asset.IMEI,
+                IMSI: asset.IMSI,
                 Id: asset.Id,
                 AssetImg: assetImg,
                 ShowPayment: true,
@@ -170,6 +184,7 @@
                 let $el = $$(e.target);
                 let alarm = $el.data('name');
                 let state = JSON.parse($el.data('state'));
+                let command = $el.data('command');
                 let data = {
                     MajorToken: self.$root.MajorToken,
                     MinorToken: self.$root.MinorToken,
@@ -197,6 +212,9 @@
                             });
                             self.$setState({ [alarm]: state });
                             self.$app.methods.checkBalance();
+                            if(command && command === 'locate'){
+                                self.$app.methods.sendCommand(API_URL.SEND_COM_POS, self.IMSI);
+                            }
 
                         }else if(result.data && result.data.MajorCode === '200' && result.data.MinorCode === '1003'){
                             self.$app.methods.customDialog({title: LANGUAGE.PROMPT_MSG039, text: LANGUAGE.PROMPT_MSG040});
