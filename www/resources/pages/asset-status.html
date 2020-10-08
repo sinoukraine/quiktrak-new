@@ -105,20 +105,6 @@
                     </li>
                     {{/if}}
                     {{#if IsLockDoorSupported}}
-                    <!--<li class="item-content">
-                        <div class="item-media {{#if LockDoor}} text-color-red {{else}} text-color-lightgray {{/if}}">
-                            <i class="f7-icons icon-live-lock-door"></i>
-                        </div>
-                        <div class="item-inner">
-                            <div class="item-title tooltip-init" data-trigger="click" data-tooltip="{{@global.LANGUAGE.PROMPT_MSG006}}">{{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG09}}  <span class="badge color-lightblue">?</span></div>
-                            <div class="item-after">
-                                <label class="toggle color-green toggle-LockDoor">
-                                    <input type="checkbox" name="LockDoor" {{#if LockDoor}} checked {{/if}}>
-                                    <span class="toggle-icon"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </li>-->
                     <li class="item-content">
                         <div class="item-media text-color-lightgray">
                             <i class="f7-icons icon-live-lock-door"></i>
@@ -126,10 +112,6 @@
                         <div class="item-inner">
                             <div class="item-title">{{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG09}}</div>
                             <div class="item-after min-width-122">
-                                <!--<label class="toggle color-green toggle-LockDoor">
-                                    <input type="checkbox" name="LockDoor" {{#if LockDoor}} checked {{/if}}>
-                                    <span class="toggle-icon"></span>
-                                </label>-->
                                 <a href="#" class=" width-100 button button-fill color-darkgray" @click="unlockDoor">{{@global.LANGUAGE.COM_MSG114}}</a>
                             </div>
                         </div>
@@ -307,7 +289,8 @@
                 IsImmobilisationSupported: (parseInt(asset._FIELD_INT2) & 1) > 0,
                 IsLockDoorSupported: (parseInt(asset._FIELD_INT2) & 512) > 0,
             };
-
+            /*console.log(parseInt(asset._FIELD_INT2) & 512 )
+            console.log((parseInt(asset._FIELD_INT2) & 512) > 0)*/
 
 
             return ret;
@@ -319,7 +302,7 @@
                 let asset = POSINFOASSETLIST[self.IMEI];
                 let afs = Protocol.Helper.getAssetStateInfo(asset);
 
-
+               // console.log((parseInt(asset._FIELD_INT2) & 512) > 0)
                 self.$setState({
                     PositionTime: asset.posInfo.positionTime ? asset.posInfo.positionTime.format(window.COM_TIMEFORMAT) : LANGUAGE.COM_MSG031,
                     Speed: Protocol.Helper.getSpeedValue(asset.Unit, asset.posInfo.speed) + ' ' + Protocol.Helper.getSpeedUnit(asset.Unit),
@@ -343,7 +326,7 @@
                     Coords: 'GPS: ' + Protocol.Helper.convertDMS(asset.posInfo.lat, asset.posInfo.lng),
 
                     IsImmobilisationSupported: (parseInt(asset._FIELD_INT2) & 1) > 0,
-                    IsLockDoorSupported: (parseInt(asset._FIELD_INT2) & 1) > 0,
+                    IsLockDoorSupported: (parseInt(asset._FIELD_INT2) & 512) > 0,
                 });
 
                 if ( !asset.lastQueryPosinfo ||

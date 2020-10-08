@@ -423,7 +423,7 @@ const app = new Framework7({
             self.request.promise.get(API_URL.LOGOUT, data, 'json')
                 .then(function (result) {
                     console.log('logged out')
-                    console.log(result);
+                   // console.log(result);
                 });
 
             self.utils.nextTick(()=>{
