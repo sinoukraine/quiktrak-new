@@ -302,6 +302,7 @@
                 IMEI: IMEI,
                 Name: index === -1 ? assetList[IMEI].Name : LANGUAGE.ASSET_ALARM_MSG00,
                 MaxSpeed: index === -1 ? assetList[IMEI].MaxSpeed : 80,
+                isNegativeInputSupported: index === -1 ? (parseInt(assetList[IMEI]._FIELD_INT2) & Protocol.FeaturesEnum.NegativeInput) > 0 : (parseInt(assetList[IMEI.split(',')[0]]._FIELD_INT2) & Protocol.FeaturesEnum.NegativeInput) > 0,
 
                 ShowAdditionalBlocks: false,
                 IgnoreBetweenState: false,
@@ -911,6 +912,16 @@
                                         val: 4,
                                         title: LANGUAGE.ASSET_ALARM_MSG09, //power
                                     },
+                                    {
+                                        state: true,
+                                        val: 1048576,
+                                        title: LANGUAGE.ASSET_ALARM_MSG43, //witi disarmed
+                                    },
+                                    {
+                                        state: true,
+                                        val: 262144,
+                                        title: LANGUAGE.ASSET_ALARM_MSG42, //witi armed
+                                    }
                                 ];
                             }else{
                                 ret = [

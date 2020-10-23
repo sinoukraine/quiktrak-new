@@ -12,6 +12,7 @@ const API_DOMIAN6 = "https://nomad.sinopacific.com.ua/";
 const API_DOMIAN7 = "https://nominatim.sinopacific.com.ua/";
 const API_DOMIAN8 = "https://nominatim.openstreetmap.org/";
 const API_DOMIAN9 = "https://upload.quiktrak.co/";
+const API_DOMIAN10 = "https://m2mdata03.sinopacific.com.ua/";
 
 const API_URL = {};
 
@@ -68,7 +69,7 @@ API_URL.GET_PLAYBACK_ARR = API_DOMIAN1 + "Device/GetHisPosArray2";
 API_URL.GET_PLAYBACK_ARR_OPTIMISED = "https://osrm.sinopacific.com.ua/playback/v2";
 API_URL.GET_ADDRESSES_FROM_ARRAY = API_DOMIAN5 + "geocode/reverse/v1/";
 API_URL.GET_SPEEDLIMIT = API_DOMIAN5 + "speedlimits/v1";
-API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN6 + "api/v2/reports/Playback";
+API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN10 + "api/v2/reports/Playback";
 
 API_URL.GET_REPORT_ALERTLIST = API_DOMIAN1 + "Report/GetAlertList";
 API_URL.GET_REPORT_TRIP = API_DOMIAN1 + "Report/GetTripReport";
@@ -499,11 +500,11 @@ const app = new Framework7({
                             self.methods.getAssetListPosInfo(assetListObj, 1);  // '1' - means update
                         }, 30*1000);
 
-                        if(self.data.AccountSolutionArray.indexOf('protect') > -1 || self.data.AccountSolutionArray.indexOf('witiprotect') > -1){
-                            setTimeout(function () {
-                                self.methods.checkIsLowBalance(result.data.Data.UserInfo.SMSTimes);
-                            }, 2000)
-                        }
+
+                        setTimeout(function () {
+                            self.methods.checkIsLowBalance(result.data.Data.UserInfo.SMSTimes);
+                        }, 2000)
+
 
                         self.utils.nextFrame(()=>{
                             self.methods.getAssetListPosInfo(assetListObj);
@@ -1506,6 +1507,9 @@ const app = new Framework7({
         },
         checkIsLowBalance(credits){
             if (credits > 6) {
+                return;
+            }
+            if(this.data.AccountSolutionArray.indexOf('protect') === -1 && this.data.AccountSolutionArray.indexOf('witiprotect') === -1) {
                 return;
             }
 

@@ -247,9 +247,9 @@ window.LanguagePackages= {
 		"PROMPT_MSG119": "IMPORTANT ANNOUNCEMENT",
 		"PROMPT_MSG120": "Locate and Immobilise - Update current location and Immobilise ",
 		"PROMPT_MSG121": "Low credit warning.",
-		"PROMPT_MSG122": "You must recharge to continue to receive alarms for assets with Protect and Loc8 solutions.",
+		"PROMPT_MSG122": "You must recharge to continue to receive alarms for assets with Protect solutions.",
 		"PROMPT_MSG123": "Recharge now?",
-		"PROMPT_MSG124": "All alarms for assets with Protect and Loc8 solutions type are disabled",
+		"PROMPT_MSG124": "All alarms for assets with Protect solutions type are disabled",
 		"PROMPT_MSG125": "To renew alarms you must recharge and re enable alarms",
 		"PROMPT_MSG126": "Command Sent",
 
@@ -392,6 +392,8 @@ window.LanguagePackages= {
 		"ASSET_ALARM_MSG39": "WiTi Alarm",
 		"ASSET_ALARM_MSG40": "PTO Input On",
 		"ASSET_ALARM_MSG41": "PTO Input Off",
+		"ASSET_ALARM_MSG42": "WiTi Armed",
+		"ASSET_ALARM_MSG43": "WiTi Disarmed",
 
 		"GEOFENCES_MSG00": "Circle",
 		"GEOFENCES_MSG01": "Polygon",

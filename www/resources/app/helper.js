@@ -327,6 +327,11 @@ let Protocol = {
         "Immobilise": 2,
         "LockDoor": 4,
     },
+    FeaturesEnum: {
+        Immobilisation: 1,
+        NegativeInput: 256,
+        LockDoor: 512,
+    },
     CustomerTypes: {
         Agent: 2,
         Enterprise: 4,
