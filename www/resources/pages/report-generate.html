@@ -260,7 +260,7 @@
                     </ul>
                 </div>
 
-                
+
             </form>
         </div>
 </template>
@@ -280,7 +280,7 @@
             let overviewOptionsList = Protocol.Helper.getOverviewReportOptions();
 
             for (const key of keys) {
-                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect'){
+                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect'){
                     assetList.push(assetListObj[key]);
                 }
             }
@@ -383,9 +383,9 @@
 
 
         },
-       
+
         on: {
-            pageInit: function (e, page) { 
+            pageInit: function (e, page) {
                 let self = this;
                 let startDateTimeEl = page.$el.find('[name="StartDateTime"]');
                 let endDateTimeEl = page.$el.find('[name="EndDateTime"]');
@@ -447,7 +447,8 @@
                         To: moment.utc(self.CalendarEndDateTime.getValue()[0]).format(window.COM_TIMEFORMAT),
                         IMEIs: assetsEl.val(),
                         Emails: contactsEl.val(),
-                        Export: 'PDF'
+                        Export: 'PDF',
+                        Logo: self.$app.data.logoExternal,
                     };
                     if(self.CustomEmail){
                         data.Emails.push(customEmailEl.val());

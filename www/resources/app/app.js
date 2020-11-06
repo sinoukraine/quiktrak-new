@@ -69,7 +69,7 @@ API_URL.GET_PLAYBACK_ARR = API_DOMIAN1 + "Device/GetHisPosArray2";
 API_URL.GET_PLAYBACK_ARR_OPTIMISED = "https://osrm.sinopacific.com.ua/playback/v2";
 API_URL.GET_ADDRESSES_FROM_ARRAY = API_DOMIAN5 + "geocode/reverse/v1/";
 API_URL.GET_SPEEDLIMIT = API_DOMIAN5 + "speedlimits/v1";
-API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN10 + "api/v2/reports/Playback";
+API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN6 + "api/v2/reports/Playback";
 
 API_URL.GET_REPORT_ALERTLIST = API_DOMIAN1 + "Report/GetAlertList";
 API_URL.GET_REPORT_TRIP = API_DOMIAN1 + "Report/GetTripReport";
@@ -80,6 +80,8 @@ API_URL.GET_REPORT_BY_EVENT = API_DOMIAN1 + "Report/GetEventReport";
 API_URL.GET_AUTOMATED_REPORT_LIST = API_DOMIAN1 + "Device/GetLogBookList";
 API_URL.AUTOMATED_REPORT_EDIT = API_DOMIAN1 + "Device/UpdateLogBook";
 API_URL.AUTOMATED_REPORT_DELETE = API_DOMIAN1 + "Device/DeleteLogBook";
+
+API_URL.GET_ASSET_RAITING = API_DOMIAN1 + "Device/DriverBehaviour";
 
 
 //let VirtualAssetListMain = false;
@@ -134,6 +136,7 @@ const app = new Framework7({
             logo: 'resources/images/logo.svg',
             logoBlack: 'resources/images/logo-black.svg',
             logoModal: 'resources/images/logo-black.svg',
+            logoExternal: 'https://helper.quiktrak.com.au/logo/quiktrak/logo.png',
             MaxMapPopupWidth: maxPopupWidth,
             PolygonCustomization: {
                 color: '#AA5959',
@@ -1509,7 +1512,7 @@ const app = new Framework7({
             if (credits > 6) {
                 return;
             }
-            if(this.data.AccountSolutionArray.indexOf('protect') === -1 && this.data.AccountSolutionArray.indexOf('witiprotect') === -1) {
+            if(this.data.AccountSolutionArray.indexOf('protect') === -1 && this.data.AccountSolutionArray.indexOf('witiprotect') === -1 && this.data.AccountSolutionArray.indexOf('qprotect') === -1) {
                 return;
             }
 
@@ -1609,6 +1612,8 @@ const app = new Framework7({
             if(params.asset){
                 switch (params.type) {
                     case 'track':
+                    case 'wititrack':
+                    case 'boat_watch':
                         ret = Protocol.MarkerIcon[0];
                         break;
                     case 'watch':
@@ -1618,6 +1623,8 @@ const app = new Framework7({
                         ret = Protocol.MarkerIcon[2];
                         break;
                     case 'protect':
+                    case 'qprotect':
+                    case 'witiprotect':
                         ret = Protocol.MarkerIcon[3];
                         break;
                 }
@@ -2233,7 +2240,8 @@ const app = new Framework7({
                                 continue;
                             }
                             if ( list[i].SolutionType.toLowerCase().indexOf('protect') >= 0 ||
-                                list[i].SolutionType.toLowerCase().indexOf('witiprotect') >= 0 )
+                                list[i].SolutionType.toLowerCase().indexOf('witiprotect') >= 0 ||
+                                list[i].SolutionType.toLowerCase().indexOf('qprotect') >= 0 )
                             {
                                 itemIndexToShow.push(i);
                             }
@@ -2255,7 +2263,8 @@ const app = new Framework7({
                                 continue;
                             }
                             if ( list[i].SolutionType.toLowerCase().indexOf('track') >= 0 ||
-                                 list[i].SolutionType.toLowerCase().indexOf('watch') >= 0 )
+                                 list[i].SolutionType.toLowerCase().indexOf('watch') >= 0 ||
+                                 list[i].SolutionType.toLowerCase().indexOf('wititrack') >= 0 )
                             {
                                 itemIndexToShow.push(i);
                             }
@@ -2430,6 +2439,7 @@ const app = new Framework7({
                     switch (type){
                         case 'protect':
                         case 'witiprotect':
+                        case 'qprotect':
                             ret.Protect++;
                             break;
 
@@ -2437,7 +2447,9 @@ const app = new Framework7({
                             ret.Loc8++;
                             break;
 
-                        case 'track': case 'watch':
+                        case 'track':
+                        case 'watch':
+                        case 'wititrack':
                             ret.Live++;
                             break;
                     }
@@ -2578,6 +2590,105 @@ const app = new Framework7({
                     },
                 ]
             }).open();
+        },
+        showCommandSentMessage: function(callbackConfirm, firstTimeNotice){
+            let modalTex = `<div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG127 }</div>`;
+            if(!firstTimeNotice){
+                modalTex += `<div class="list no-hairlines margin-top-half no-margin-bottom">
+                            <ul>
+                                <li>
+                                    <label class="item-checkbox item-content color-green no-padding-left">
+                                        <input type="checkbox" name="checkbox-not-show-command-sent-message" value="" />
+                                        <i class="icon icon-checkbox"></i>
+                                        <div class="item-inner no-padding-right">
+                                            <div class="item-title text-color-gray">${ LANGUAGE.PROMPT_MSG113 }</div>
+                                        </div>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>`;
+            }
+
+            let buttons = [];
+            if(firstTimeNotice){
+                buttons = [
+                    {
+                        text: LANGUAGE.COM_MSG055,
+                        onClick: (parent) => {
+                            this.methods.setInStorage({name: 'additionalFlags', data: {commandSentMessageFirstTime: true}});
+                            if(callbackConfirm instanceof Function){
+                                callbackConfirm()
+                            }
+                        }
+                    },
+                ]
+            }else{
+                buttons = [
+                    {
+                        text: LANGUAGE.COM_MSG116,
+                        onClick: (parent) => {
+                            let checkboxState = parent.$el.find('input[name="checkbox-not-show-command-sent-message"]').is(":checked");
+                            if (checkboxState) {
+                                this.methods.setInStorage({name: 'additionalFlags', data: {commandSentMessage: checkboxState}});
+                            }
+                            if(callbackConfirm instanceof Function){
+                                callbackConfirm()
+                            }
+                        }
+                    },
+                    {
+                        text: LANGUAGE.COM_MSG001,
+                        onClick: (parent) => {
+                            let checkboxState = parent.$el.find('input[name="checkbox-not-show-command-sent-message"]').is(":checked");
+                            if (checkboxState) {
+                                this.methods.setInStorage({name: 'additionalFlags', data: {commandSentMessage: checkboxState}});
+                            }
+                        }
+                    },
+                ]
+            }
+
+            this.dialog.create({
+                title: `<div class="custom-modal-logo-wrapper"><img class="custom-modal-logo" src="${ this.data.logoBlack }" alt=""/></div>`,
+                text: modalTex,
+                verticalButtons: !firstTimeNotice,
+                buttons: buttons
+            }).open();
+
+        },
+        precheckSendCommand(command){
+            let additionalFlags = this.methods.getFromStorage('additionalFlags');
+
+          /*  let command = {
+                type: params.type,
+                imei: '123123123',
+                timeStamp: moment().format(window.COM_TIMEFORMAT)
+            }*/
+            let sameCommandIndex = -1;
+            let sendCommandFunction = () => {
+                this.methods.sendCommand(command.url, command.imsi);
+
+                if(!additionalFlags.recentCommandsSent || !additionalFlags.recentCommandsSent.length){
+                    additionalFlags.recentCommandsSent = [command]
+                }else{
+                    if(sameCommandIndex !== -1){
+                        additionalFlags.recentCommandsSent.splice(sameCommandIndex, 1);
+                    }
+                    additionalFlags.recentCommandsSent.push(command)
+                }
+                this.methods.setInStorage({name: 'additionalFlags', data: additionalFlags});
+            }
+
+            if(!additionalFlags.recentCommandsSent || !additionalFlags.recentCommandsSent.length || !additionalFlags.commandSentMessageFirstTime){
+                this.methods.showCommandSentMessage(sendCommandFunction, true)
+            }else{
+                sameCommandIndex = additionalFlags.recentCommandsSent.findIndex( el => el.imei === command.imei && el.type === command.type );
+                if(additionalFlags.commandSentMessage || sameCommandIndex === -1 || sameCommandIndex > -1 && moment().diff(moment(additionalFlags.recentCommandsSent[sameCommandIndex].timeStamp, window.COM_TIMEFORMAT), 'minutes') >= 3){
+                    sendCommandFunction()
+                }else{
+                    this.methods.showCommandSentMessage(sendCommandFunction)
+                }
+            }
         },
         customNotification: function(params){
             let self = this;

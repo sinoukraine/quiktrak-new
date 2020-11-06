@@ -97,7 +97,7 @@
                 //Name: asset.Name,
                 IMEI: !viewAll ? asset.IMEI : '',
                 IMSI: !viewAll ? asset.IMSI : '',
-                LiveAsset: asset && asset.SolutionType.toLowerCase() !== 'protect' && asset.SolutionType.toLowerCase() !== 'loc8' || !!viewAll,
+                LiveAsset: asset && asset.SolutionType.toLowerCase() !== 'protect' && asset.SolutionType.toLowerCase() !== 'loc8' && asset.SolutionType.toLowerCase() !== 'qprotect' && asset.SolutionType.toLowerCase() !== 'witiprotect' || !!viewAll,
                 ViewAll: !!viewAll,
                 MarkersIds: {},
             };
@@ -155,7 +155,15 @@
             },
             GetProtectUpdate: function(){
                 let self = this;
-                self.$app.methods.sendCommand(API_URL.SEND_COM_POS, self.IMSI);
+                let data = {
+                    url: API_URL.SEND_COM_POS,
+                    imsi: self.IMSI,
+                    imei: self.IMEI,
+                    type: 'position',
+                    timeStamp: moment().format(window.COM_TIMEFORMAT)
+                }
+                self.$app.methods.precheckSendCommand(data);
+                //self.$app.methods.sendCommand(API_URL.SEND_COM_POS, self.IMSI);
             },
             PanoButtonUpdate: function (latlng=[]) {
                 let self = this;

@@ -40,10 +40,11 @@
             </div>
         </div>
         {{/if}}
-        <div class="toolbar toolbar-bottom ">
-            <div class="toolbar-inner ">
+        <div class="toolbar toolbar-bottom no-border">
+            <div class="toolbar-inner row no-gap no-padding">
                 {{#if isLiveAsset}}
-                <a href="/report-theft/?imei={{IMEI}}" class="link button width-100 color-white"><i class="f7-icons icon-live-report-thief margin-right"></i> {{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG07}}</a>
+                <a href="/report-theft/?imei={{IMEI}}" class="link button col-50 color-white"><i class="f7-icons icon-live-report-thief margin-right"></i> {{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG07}}</a>
+                <a href="/asset-rating/?imei={{IMEI}}" class="link button col-50 bg-color-green text-color-white no-border-radius"><i class="f7-icons icon-rating margin-right"></i> {{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG10}}</a>
                 {{else}}
                 <a @click="requestStatus" href="#" class="link button width-100 color-white"><i class="f7-icons icon-header-refresh margin-right"></i> {{@global.LANGUAGE.COM_MSG057}}</a>
                 {{/if}}
@@ -261,7 +262,7 @@
                 IMEI: asset.IMEI,
                 IMSI: asset.IMSI,
                 Id: asset.Id,
-                isLiveAsset: asset.SolutionType.toLowerCase() !== 'protect' && asset.SolutionType.toLowerCase() !== 'loc8',
+                isLiveAsset: asset.SolutionType.toLowerCase() !== 'protect' && asset.SolutionType.toLowerCase() !== 'loc8' && asset.SolutionType.toLowerCase() !== 'witiprotect' && asset.SolutionType.toLowerCase() !== 'qprotect',
                 Tabs: !!tabsFlag,
 
                 PositionTime: asset.posInfo.positionTime ? asset.posInfo.positionTime.format(window.COM_TIMEFORMAT) : LANGUAGE.COM_MSG031,
@@ -345,7 +346,15 @@
             },
             requestStatus: function () {
                 let self = this;
-                self.$app.methods.sendCommand(API_URL.SEND_COM_STATUS, self.IMSI);
+                let data = {
+                    url: API_URL.SEND_COM_STATUS,
+                    imsi: self.IMSI,
+                    imei: self.IMEI,
+                    type: 'status',
+                    timeStamp: moment().format(window.COM_TIMEFORMAT)
+                }
+                self.$app.methods.precheckSendCommand(data);
+                //self.$app.methods.sendCommand(API_URL.SEND_COM_STATUS, self.IMSI);
             },
             changeState: function (params){
                 let self = this;

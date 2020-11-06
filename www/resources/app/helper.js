@@ -329,7 +329,7 @@ let Protocol = {
     },
     FeaturesEnum: {
         Immobilisation: 1,
-        NegativeInput: 256,
+        PositiveInput: 256,
         LockDoor: 512,
     },
     CustomerTypes: {
@@ -727,10 +727,19 @@ let Protocol = {
                     case 'witiprotect':
                         ret = 'icon-live-protect2';
                         break;
+                    case 'qprotect':
+                        ret = 'icon-live-protect2';
+                        break;
                     case 'loc8':
                         ret = 'icon-live-loc82';
                         break;
                     case 'track':
+                        ret = 'icon-live-track2';
+                        break;
+                    case 'wititrack':
+                        ret = 'icon-live-track2';
+                        break;
+                    case 'boat_watch':
                         ret = 'icon-live-track2';
                         break;
                     case 'watch':

@@ -323,6 +323,9 @@
 .margin-left-quarter {
     margin-left: calc(var(--f7-typography-margin)/ 4)!important;
 }
+.no-border-radius{
+    border-radius: 0!important;
+}
 .z-index-0{
     z-index: 0;
 }

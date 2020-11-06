@@ -1087,7 +1087,7 @@
                     for (let trip of tripsDetails) {
                         AvgSpeed += parseFloat(trip.AvgSpeed);
                         if(MaxSpeed < parseFloat(trip.MaxSpeed)){
-                            MaxSpeed = trip.MaxSpeed;
+                            MaxSpeed = parseFloat(trip.MaxSpeed);
                         }
                     }
                     if(MaxSpeed){
@@ -1105,7 +1105,6 @@
                             Value: parseFloat(AvgSpeed).toFixed(1) + ' ' + LANGUAGE.COM_MSG081,
                         })
                     }
-
                 }
                 list.push(
                     {
@@ -1287,6 +1286,7 @@
                                         DateFrom: self.PlaybackFrom, // UTC!
                                         DateTo: self.PlaybackTo, // UTC!
                                         extension: "pdf", // pdf, xlsx, json, html
+                                        Logo: self.$app.data.logoExternal,
                                         MajorToken: self.$root.MajorToken,
                                         MinorToken: self.$root.MinorToken,
                                         Recipients: recipients,

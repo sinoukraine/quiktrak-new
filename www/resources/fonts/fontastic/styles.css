@@ -383,3 +383,9 @@
 .icon-locimmob:before {
   content: "\e014";
 }
+.icon-rating:before {
+  content: "\e015";
+}
+.icon-braking:before {
+  content: "\e016";
+}
