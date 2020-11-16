@@ -69,7 +69,7 @@ API_URL.GET_PLAYBACK_ARR = API_DOMIAN1 + "Device/GetHisPosArray2";
 API_URL.GET_PLAYBACK_ARR_OPTIMISED = "https://osrm.sinopacific.com.ua/playback/v2";
 API_URL.GET_ADDRESSES_FROM_ARRAY = API_DOMIAN5 + "geocode/reverse/v1/";
 API_URL.GET_SPEEDLIMIT = API_DOMIAN5 + "speedlimits/v1";
-API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN6 + "api/v2/reports/Playback";
+API_URL.GET_PLAYBACK_REPORT_ON_MAIL = API_DOMIAN10 + "api/v2/reports/Playback";
 
 API_URL.GET_REPORT_ALERTLIST = API_DOMIAN1 + "Report/GetAlertList";
 API_URL.GET_REPORT_TRIP = API_DOMIAN1 + "Report/GetTripReport";
@@ -316,6 +316,7 @@ const app = new Framework7({
         },
         convertTimZoneValToZZformat: function(val){
             let ret = '';
+            val = parseFloat(val);
             val >= 0 ? ret='+' : ret='-';
             if (val < 10 && val >= 0 ||
                 val < 0 && val > -10){

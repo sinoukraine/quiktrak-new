@@ -278,6 +278,8 @@
                             let device = self.$app.methods.setAssetList({device: data});
 
                              mainView.router.back({force: true, ignoreCache: true});
+                        }else if(result.data.MajorCode === '100' && result.data.MinorCode === '1003'){
+                            self.$app.methods.customDialog({title: LANGUAGE.PROMPT_MSG039, text: LANGUAGE.PROMPT_MSG040});
                         }else{
                             self.$app.dialog.alert(LANGUAGE.PROMPT_MSG023 + `<br>MajorCode: ${result.data.MajorCode}<br>MinorCode: ${result.data.MinorCode}<br>${result.data.Data}`);
                         }

@@ -302,7 +302,7 @@ let Protocol = {
         "RESPONSE": 2
     },
     ProductFeatures : {
-        "Static":256,
+        /*"Static":256,
         "Holder":32768,
         "FuelSensor":2048,
         "Acc":128,
@@ -320,7 +320,32 @@ let Protocol = {
         "TempSensor":4096,
         "Alt":2,
         "Speed":8,
-        "Voltage":512
+        "Voltage":512*/
+        None: 0,
+        LatLng: 1,
+        Alt: 2,
+        Direct: 4,
+        Speed: 8,
+        Mileage: 16,
+        GsmSignal: 32,
+        GpsSignal: 64,
+        Acc: 128,
+        Static: 256,
+        Voltage: 512,
+        Battery: 1024,
+        FuelSensor: 2048,
+        TempSensor: 4096,
+        OBD: 8192,
+        RFIDCard: 16384,
+        Holder: 32768,
+        DrivingTime: 65536,
+        Acc2: 131072,
+        Heartrate: 262144,
+        Charging: 524288,
+        BrakePedal: 1048576,
+        Seat_belt: 2097152,
+        HarshBracking: 4194304,
+        HarshAcceleration: 8388608,
     },
     StatusNewEnum:{
         "Geolock" : 1,
@@ -844,7 +869,7 @@ let Protocol = {
             }
             return ret;
         },
-        getTimezoneList: function(selected){
+        /*getTimezoneList: function(selected){
             let ret = [
                 { Value: -12,   Name: '(GMT -12:00) Eniwetok,Kwajalein' },
                 { Value: -11,   Name: '(GMT -12:00) Eniwetok,Kwajalein' },
@@ -883,6 +908,122 @@ let Protocol = {
             ];
             if (selected) {
                 ret[ret.findIndex( el => el.Value == selected)].State = true;
+            }
+
+            return ret;
+        },*/
+        getTimezoneList: function(selected){
+            let ret = [
+                { Value: '-12_Dateline Standard Time', Name: '(UTC-12:00) International Date Line West' },
+                { Value: '-10_Hawaiian Standard Time', Name: '(UTC-10:00) Hawaii' },
+                { Value: '-9_Alaskan Standard Time', Name: '(UTC-09:00) Alaska' },
+                { Value: '-8_Pacific Standard Time (Mexico)', Name: '(UTC-08:00) Baja California' },
+                { Value: '-8_Pacific Standard Time', Name: '(UTC-08:00) Pacific Time (US & Canada)' },
+                { Value: '-7_US Mountain Standard Time', Name: '(UTC-07:00) Arizona' },
+                { Value: '-7_Mountain Standard Time (Mexico)', Name: '(UTC-07:00) Chihuahua, La Paz, Mazatlan' },
+                { Value: '-7_Mountain Standard Time', Name: '(UTC-07:00) Mountain Time (US & Canada)' },
+                { Value: '-6_Central America Standard Time', Name: '(UTC-06:00) Central America' },
+                { Value: '-6_Central Standard Time', Name: '(UTC-06:00) Central Time (US & Canada)' },
+                { Value: '-6_Central Standard Time (Mexico)', Name: '(UTC-06:00) Guadalajara, Mexico City, Monterrey' },
+                { Value: '-6_Canada Central Standard Time', Name: '(UTC-06:00) Saskatchewan' },
+                { Value: '-5_SA Pacific Standard Time', Name: '(UTC-05:00) Bogota, Lima, Quito, Rio Branco' },
+                { Value: '-5_Eastern Standard Time', Name: '(UTC-05:00) Eastern Time (US & Canada)' },
+                { Value: '-5_US Eastern Standard Time', Name: '(UTC-05:00) Indiana (East)' },
+                { Value: '-4.5_Venezuela Standard Time', Name: '(UTC-04:30) Caracas' },
+                { Value: '-4_Paraguay Standard Time', Name: '(UTC-04:00) Asuncion' },
+                { Value: '-4_Atlantic Standard Time', Name: '(UTC-04:00) Atlantic Time (Canada)' },
+                { Value: '-4_Central Brazilian Standard Time', Name: '(UTC-04:00) Cuiaba' },
+                { Value: '-4_SA Western Standard Time', Name: '(UTC-04:00) Georgetown, La Paz, Manaus, San Juan' },
+                { Value: '-4_Pacific SA Standard Time', Name: '(UTC-04:00) Santiago' },
+                { Value: '-3.5_Newfoundland Standard Time', Name: '(UTC-03:30) Newfoundland' },
+                { Value: '-3_E. South America Standard Time', Name: '(UTC-03:00) Brasilia' },
+                { Value: '-3_Argentina Standard Time', Name: '(UTC-03:00) Buenos Aires' },
+                { Value: '-3_SA Eastern Standard Time', Name: '(UTC-03:00) Cayenne, Fortaleza' },
+                { Value: '-3_Greenland Standard Time', Name: '(UTC-03:00) Greenland' },
+                { Value: '-3_Montevideo Standard Time', Name: '(UTC-03:00) Montevideo' },
+                { Value: '-3_Bahia Standard Time', Name: '(UTC-03:00) Salvador' },
+                { Value: '-2_Mid-Atlantic Standard Time', Name: '(UTC-02:00) Mid-Atlantic - Old' },
+                { Value: '-1_Azores Standard Time', Name: '(UTC-01:00) Azores' },
+                { Value: '-1_Cape Verde Standard Time', Name: '(UTC-01:00) Cape Verde Is.' },
+                { Value: '0_Morocco Standard Time', Name: '(UTC) Casablanca' },
+                { Value: '0_UTC', Name: '(UTC) Coordinated Universal Time' },
+                { Value: '0_GMT Standard Time', Name: '(UTC) Dublin, Edinburgh, Lisbon, London' },
+                { Value: '0_Greenwich Standard Time', Name: '(UTC) Monrovia, Reykjavik' },
+                { Value: '1_W. Europe Standard Time', Name: '(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna' },
+                { Value: '1_Central Europe Standard Time', Name: '(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague' },
+                { Value: '1_Romance Standard Time', Name: '(UTC+01:00) Brussels, Copenhagen, Madrid, Paris' },
+                { Value: '1_Central European Standard Time', Name: '(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb' },
+                { Value: '1_W. Central Africa Standard Time', Name: '(UTC+01:00) West Central Africa' },
+                { Value: '1_Namibia Standard Time', Name: '(UTC+01:00) Windhoek' },
+                { Value: '2_Jordan Standard Time', Name: '(UTC+02:00) Amman' },
+                { Value: '2_GTB Standard Time', Name: '(UTC+02:00) Athens, Bucharest' },
+                { Value: '2_Middle East Standard Time', Name: '(UTC+02:00) Beirut' },
+                { Value: '2_Egypt Standard Time', Name: '(UTC+02:00) Cairo' },
+                { Value: '2_Syria Standard Time', Name: '(UTC+02:00) Damascus' },
+                { Value: '2_E. Europe Standard Time', Name: '(UTC+02:00) E. Europe' },
+                { Value: '2_South Africa Standard Time', Name: '(UTC+02:00) Harare, Pretoria' },
+                { Value: '2_FLE Standard Time', Name: '(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius' },
+                { Value: '2_Turkey Standard Time', Name: '(UTC+02:00) Istanbul' },
+                { Value: '2_Israel Standard Time', Name: '(UTC+02:00) Jerusalem' },
+                { Value: '2_Libya Standard Time', Name: '(UTC+02:00) Tripoli' },
+                { Value: '3_Arabic Standard Time', Name: '(UTC+03:00) Baghdad' },
+                { Value: '3_Kaliningrad Standard Time', Name: '(UTC+03:00) Kaliningrad, Minsk' },
+                { Value: '3_Arab Standard Time', Name: '(UTC+03:00) Kuwait, Riyadh' },
+                { Value: '3_E. Africa Standard Time', Name: '(UTC+03:00) Nairobi' },
+                { Value: '3.5_Iran Standard Time', Name: '(UTC+03:30) Tehran' },
+                { Value: '4_Arabian Standard Time', Name: '(UTC+04:00) Abu Dhabi, Muscat' },
+                { Value: '4_Azerbaijan Standard Time', Name: '(UTC+04:00) Baku' },
+                { Value: '4_Russian Standard Time', Name: '(UTC+04:00) Moscow, St. Petersburg, Volgograd' },
+                { Value: '4_Mauritius Standard Time', Name: '(UTC+04:00) Port Louis' },
+                { Value: '4_Georgian Standard Time', Name: '(UTC+04:00) Tbilisi' },
+                { Value: '4_Caucasus Standard Time', Name: '(UTC+04:00) Yerevan' },
+                { Value: '4.5_Afghanistan Standard Time', Name: '(UTC+04:30) Kabul' },
+                { Value: '5_West Asia Standard Time', Name: '(UTC+05:00) Ashgabat, Tashkent' },
+                { Value: '5_Pakistan Standard Time', Name: '(UTC+05:00) Islamabad, Karachi' },
+                { Value: '5.5_India Standard Time', Name: '(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi' },
+                { Value: '5.5_Sri Lanka Standard Time', Name: '(UTC+05:30) Sri Jayawardenepura' },
+                { Value: '5.75_Nepal Standard Time', Name: '(UTC+05:45) Kathmandu' },
+                { Value: '6_Central Asia Standard Time', Name: '(UTC+06:00) Astana' },
+                { Value: '6_Bangladesh Standard Time', Name: '(UTC+06:00) Dhaka' },
+                { Value: '6_Ekaterinburg Standard Time', Name: '(UTC+06:00) Ekaterinburg' },
+                { Value: '6.5_Myanmar Standard Time', Name: '(UTC+06:30) Yangon (Rangoon)' },
+                { Value: '7_SE Asia Standard Time', Name: '(UTC+07:00) Bangkok, Hanoi, Jakarta' },
+                { Value: '7_N. Central Asia Standard Time', Name: '(UTC+07:00) Novosibirsk' },
+                { Value: '8_China Standard Time', Name: '(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi' },
+                { Value: '8_North Asia Standard Time', Name: '(UTC+08:00) Krasnoyarsk' },
+                { Value: '8_Singapore Standard Time', Name: '(UTC+08:00) Kuala Lumpur, Singapore' },
+                { Value: '8_W. Australia Standard Time', Name: '(UTC+08:00) Perth' },
+                { Value: '8_Taipei Standard Time', Name: '(UTC+08:00) Taipei' },
+                { Value: '8_Ulaanbaatar Standard Time', Name: '(UTC+08:00) Ulaanbaatar' },
+                { Value: '9_North Asia East Standard Time', Name: '(UTC+09:00) Irkutsk' },
+                { Value: '9_Tokyo Standard Time', Name: '(UTC+09:00) Osaka, Sapporo, Tokyo' },
+                { Value: '9_Korea Standard Time', Name: '(UTC+09:00) Seoul' },
+                { Value: '9.5_Cen. Australia Standard Time', Name: '(UTC+09:30) Adelaide' },
+                { Value: '9.5_AUS Central Standard Time', Name: '(UTC+09:30) Darwin' },
+                { Value: '10_E. Australia Standard Time', Name: '(UTC+10:00) Brisbane' },
+                { Value: '10_AUS Eastern Standard Time', Name: '(UTC+10:00) Canberra, Melbourne, Sydney' },
+                { Value: '10_West Pacific Standard Time', Name: '(UTC+10:00) Guam, Port Moresby' },
+                { Value: '10_Tasmania Standard Time', Name: '(UTC+10:00) Hobart' },
+                { Value: '10_Yakutsk Standard Time', Name: '(UTC+10:00) Yakutsk' },
+                { Value: '11_Central Pacific Standard Time', Name: '(UTC+11:00) Solomon Is., New Caledonia' },
+                { Value: '11_Vladivostok Standard Time', Name: '(UTC+11:00) Vladivostok' },
+                { Value: '12_New Zealand Standard Time', Name: '(UTC+12:00) Auckland, Wellington' },
+                { Value: '12_Fiji Standard Time', Name: '(UTC+12:00) Fiji' },
+                { Value: '12_Magadan Standard Time', Name: '(UTC+12:00) Magadan' },
+                { Value: '12_Kamchatka Standard Time', Name: '(UTC+12:00) Petropavlovsk-Kamchatsky - Old' },
+                { Value: '13_Tonga Standard Time', Name: '(UTC+13:00) Nuku\'alofa' },
+                { Value: '13_Samoa Standard Time', Name: '(UTC+13:00) Samoa' },
+            ];
+            if (selected) {
+                let index = ret.findIndex( el => el.Value == selected);
+                if(index !== -1){
+                    ret[index].State = true;
+                }else{
+                    index = ret.findIndex( el => parseFloat(el.Value) == selected);
+                    if(index !== -1) {
+                        ret[index].State = true;
+                    }
+                }
             }
 
             return ret;
@@ -1133,6 +1274,10 @@ let Protocol = {
                     ret.stats = false;
 
                 }else{
+                    ret.istDriverRatingSupported = false;
+                    if (asset.haveFeature("HarshBracking") && asset.haveFeature("HarshAcceleration")){
+                        ret.istDriverRatingSupported = true;
+                    }
                     if (asset.haveFeature("Speed")){
                         let speed = parseInt(asset.posInfo.speed);
                         if(asset.haveFeature("Acc") && (Protocol.PositionStatus.ACC & asset.posInfo.status) === 0 && speed <= 10)
