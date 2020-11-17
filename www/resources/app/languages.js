@@ -429,7 +429,7 @@ window.LanguagePackages= {
 
 		"ASSET_RATING_MSG00": "Per Day",
 		"ASSET_RATING_MSG01": "Per Week",
-		"ASSET_RATING_MSG02": "Harsh Bracking",
+		"ASSET_RATING_MSG02": "Harsh Braking",
 		"ASSET_RATING_MSG03": "Harsh Acceleration",
 		"ASSET_RATING_MSG04": "Excessive Idling",
 		"ASSET_RATING_MSG05": "Speeding",
@@ -566,7 +566,7 @@ window.LanguagePackages= {
 		"REPORT_ALERT_LIST_MSG20": "Input2",
 		"REPORT_ALERT_LIST_MSG21": "Input1 Low ",
 		"REPORT_ALERT_LIST_MSG22": "Negative Input",
-		"REPORT_ALERT_LIST_MSG23": "Harsh Bracking",
+		"REPORT_ALERT_LIST_MSG23": "Harsh Braking",
 		"REPORT_ALERT_LIST_MSG24": "Low Temp",
 		"REPORT_ALERT_LIST_MSG25": "High Temp",
 		"REPORT_ALERT_LIST_MSG26": "Fatigue Driving",

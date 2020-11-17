@@ -304,7 +304,7 @@
                   })
                   .catch(function (err) {
                       console.log(err);
-                      this.loadingStopped();
+                      self.loadingStopped();
                       if (err && err.status === 404){
                           self.$app.dialog.alert(LANGUAGE.PROMPT_MSG002);
                       }else{
