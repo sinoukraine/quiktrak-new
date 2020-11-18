@@ -435,6 +435,7 @@ window.LanguagePackages= {
 		"ASSET_RATING_MSG05": "Speeding",
 		"ASSET_RATING_MSG06": "of 100 points",
 
+
 		"ASSET_PLAYBACK_MSG00": "PlayBack",
 		"ASSET_PLAYBACK_MSG01": "Show Optimized",
 		"ASSET_PLAYBACK_MSG02": "Events",

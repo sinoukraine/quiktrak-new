@@ -228,7 +228,6 @@
                 self.$app.request.promise.get(API_URL.GET_ASSET_RAITING, {imei: imei}, 'json')
                   .then(function (result) {
 
-                      console.log()
                       if(result.data && result.data.MajorCode === '000' ) {
                           if (!result.data.Data) {
                               self.loadingStopped();
@@ -262,6 +261,14 @@
                                       Icon: 'icon-live-distance',
                                       Name: LANGUAGE.ASSET_RATING_MSG05,
                                       Value: result.data.Data.today && result.data.Data.today.Speeding && result.data.Data.today.Speeding > 0 ? result.data.Data.today.Speeding : 0,
+                                  },{
+                                      Icon: 'icon-status-mileage',
+                                      Name: LANGUAGE.ASSET_TRACK_MSG04,
+                                      Value: result.data.Data.today && result.data.Data.today.Mileage && result.data.Data.today.Mileage > 0 ? Protocol.Helper.getMileageValue(POSINFOASSETLIST[result.data.Data.IMEI].Unit, result.data.Data.today.Mileage) + '&nbsp;' + Protocol.Helper.getMileageUnit(POSINFOASSETLIST[result.data.Data.IMEI].Unit) : 0,
+                                  },{
+                                      Icon: 'icon-live-engine-hours',
+                                      Name: LANGUAGE.ASSET_PLAYBACK_MSG22,
+                                      Value: result.data.Data.today && result.data.Data.today.Duration && result.data.Data.today.Duration > 0 ? TimeSpan(parseFloat(result.data.Data.today.Duration) * 60000 * 60).format("^hh:mm:ss") : 0,
                                   },
                               ],
                               PerDayGauge: self.getGaugeRaitingDetails(result.data.Data.today && result.data.Data.today.points && result.data.Data.today.points > 0 ? result.data.Data.today.points : 0),
@@ -293,6 +300,14 @@
                                       Icon: 'icon-live-distance',
                                       Name: LANGUAGE.ASSET_RATING_MSG05,
                                       Value: result.data.Data.week && result.data.Data.week.Speeding && result.data.Data.week.Speeding > 0 ? result.data.Data.week.Speeding : 0,
+                                  },{
+                                      Icon: 'icon-status-mileage',
+                                      Name: LANGUAGE.ASSET_TRACK_MSG04,
+                                      Value: result.data.Data.week && result.data.Data.week.Mileage && result.data.Data.week.Mileage > 0 ? Protocol.Helper.getMileageValue(POSINFOASSETLIST[result.data.Data.IMEI].Unit, result.data.Data.week.Mileage) + '&nbsp;' + Protocol.Helper.getMileageUnit(POSINFOASSETLIST[result.data.Data.IMEI].Unit) : 0,
+                                  },{
+                                      Icon: 'icon-live-engine-hours',
+                                      Name: LANGUAGE.ASSET_PLAYBACK_MSG22,
+                                      Value: result.data.Data.week && result.data.Data.week.Duration && result.data.Data.week.Duration > 0 ? TimeSpan(parseFloat(result.data.Data.week.Duration) * 60000 * 60).format("^hh:mm:ss") : 0,
                                   },
                               ],
                               PerWeekGauge: self.getGaugeRaitingDetails(result.data.Data.week && result.data.Data.week.points && result.data.Data.week.points > 0 ? result.data.Data.week.points : 0),
