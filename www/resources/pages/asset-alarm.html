@@ -445,7 +445,7 @@
                         }
 
                         self.$setState({
-                            ShowAdditionalBlocks: data.AssetType && data.AssetType.toLowerCase() !== 'boat' && data.AssetType.toLowerCase() !== 'jetski',
+                            ShowAdditionalBlocks: !data.AssetType || data.AssetType && data.AssetType.toLowerCase() !== 'boat' && data.AssetType.toLowerCase() !== 'jetski',
                             ShowIgnoreBetweenBlock: true,
                             OverspeedState: !(data.AlarmOptions & 32),
                             OfflineState: !(data.AlarmOptions & 67108864),
@@ -621,6 +621,7 @@
             getAlarmListByType: function(type, assetType, solutionType){
                 let self = this;
                 let ret = [];
+                console.log(type, assetType, solutionType)
                 if (type) {
                     type = parseInt(type, 10);
                     assetType ? assetType = assetType.toLowerCase() : '';
