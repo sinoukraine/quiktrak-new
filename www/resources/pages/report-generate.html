@@ -280,7 +280,7 @@
             let overviewOptionsList = Protocol.Helper.getOverviewReportOptions();
 
             for (const key of keys) {
-                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect'){
+                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiqprotect'){
                     assetList.push(assetListObj[key]);
                 }
             }

@@ -755,6 +755,9 @@ let Protocol = {
                     case 'qprotect':
                         ret = 'icon-live-protect2';
                         break;
+                    case 'witiqprotect':
+                        ret = 'icon-live-protect2';
+                        break;
                     case 'loc8':
                         ret = 'icon-live-loc82';
                         break;

@@ -1513,7 +1513,10 @@ const app = new Framework7({
             if (credits > 6) {
                 return;
             }
-            if(this.data.AccountSolutionArray.indexOf('protect') === -1 && this.data.AccountSolutionArray.indexOf('witiprotect') === -1 && this.data.AccountSolutionArray.indexOf('qprotect') === -1) {
+            if(this.data.AccountSolutionArray.indexOf('protect') === -1 &&
+              this.data.AccountSolutionArray.indexOf('witiprotect') === -1 &&
+              this.data.AccountSolutionArray.indexOf('qprotect') === -1 &&
+              this.data.AccountSolutionArray.indexOf('witiqprotect') === -1) {
                 return;
             }
 
@@ -1626,6 +1629,7 @@ const app = new Framework7({
                     case 'protect':
                     case 'qprotect':
                     case 'witiprotect':
+                    case 'witiqprotect':
                         ret = Protocol.MarkerIcon[3];
                         break;
                 }
@@ -2242,7 +2246,8 @@ const app = new Framework7({
                             }
                             if ( list[i].SolutionType.toLowerCase().indexOf('protect') >= 0 ||
                                 list[i].SolutionType.toLowerCase().indexOf('witiprotect') >= 0 ||
-                                list[i].SolutionType.toLowerCase().indexOf('qprotect') >= 0 )
+                                list[i].SolutionType.toLowerCase().indexOf('qprotect') >= 0 ||
+                                list[i].SolutionType.toLowerCase().indexOf('witiqprotect') >= 0 )
                             {
                                 itemIndexToShow.push(i);
                             }
@@ -2441,6 +2446,7 @@ const app = new Framework7({
                         case 'protect':
                         case 'witiprotect':
                         case 'qprotect':
+                        case 'witiqprotect':
                             ret.Protect++;
                             break;
 

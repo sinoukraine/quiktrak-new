@@ -168,7 +168,7 @@
                 IsImmobilisationSupported: (parseInt(asset._FIELD_INT2) & 1) > 0,
                 IsLockDoorSupported: (parseInt(asset._FIELD_INT2) & 512) > 0,
 
-                IsWitiSolution: asset.SolutionType.toLowerCase() === 'witiprotect',
+                IsWitiSolution: asset.SolutionType.toLowerCase() === 'witiprotect' || asset.SolutionType.toLowerCase() === 'witiqprotect',
             };
             if(self.$app.device.ios && !additionalFlags.elemRc){
             //if(!additionalFlags.elemRc){

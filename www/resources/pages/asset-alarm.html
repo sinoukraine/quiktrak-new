@@ -339,6 +339,7 @@
                         case 'protect':
                         case 'qprotect':
                         case 'witiprotect':
+                        case 'witiqprotect':
                             AlarmListType = 1;
                             break;
                     }
@@ -925,7 +926,8 @@
                                       title: LANGUAGE.ASSET_ALARM_MSG17, //lowBattery
                                     },
                                 ]
-                            }else if(solutionType && solutionType.toLowerCase() === 'witiprotect'){
+                            }else if(solutionType && solutionType.toLowerCase() === 'witiprotect' ||
+                                    solutionType && solutionType.toLowerCase() === 'witiqprotect'){
                                 ret = [
                                     {
                                         state: true,
@@ -1001,7 +1003,9 @@
                     }
                 }
                 if (ret.length) {
-                    if(solutionType && solutionType.toLowerCase() === 'witiprotect' || solutionType && solutionType.toLowerCase() === 'wititrack'){
+                    if(solutionType && solutionType.toLowerCase() === 'witiprotect' ||
+                      solutionType && solutionType.toLowerCase() === 'wititrack' ||
+                      solutionType && solutionType.toLowerCase() === 'witiqprotect'){
                         if(this.isPositiveInputSupported){
                             ret.push({
                                 state: true,

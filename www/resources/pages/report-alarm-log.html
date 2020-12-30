@@ -140,7 +140,7 @@
             let newAssetlist = [];
             const keys = Object.keys(assetListObj);
             for (const key of keys) {
-                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witirotect'){
+                if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiqprotect'){
                     newAssetlist.push(assetListObj[key]);
                 }
             }

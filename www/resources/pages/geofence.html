@@ -476,7 +476,7 @@
                 let keys = Object.keys(assetListObj);
                 let assetList = [];
                 for (const key of keys) {
-                    if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect'){
+                    if(assetListObj[key].SolutionType.toLowerCase() !== 'protect' && assetListObj[key].SolutionType.toLowerCase() !== 'qprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiprotect' && assetListObj[key].SolutionType.toLowerCase() !== 'witiqprotect'){
                         assetListObj[key].AssetImg = self.$app.methods.getAssetImg(assetListObj[key], {'smartSelect':true});
                         assetList.push(assetListObj[key]);
                     }
