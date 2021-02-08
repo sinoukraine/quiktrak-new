@@ -361,7 +361,7 @@ window.LanguagePackages= {
 		"ASSET_ALARM_MSG06": "Alarms",
 		"ASSET_ALARM_MSG07": "Tilt / Shock",
 		"ASSET_ALARM_MSG08": "Impact / Crash",
-		"ASSET_ALARM_MSG09": "Power Disconnection",
+		"ASSET_ALARM_MSG39": "Power Disconnection",
 		"ASSET_ALARM_MSG10": "Ignition Off",
 		"ASSET_ALARM_MSG11": "Ignition On",
 		"ASSET_ALARM_MSG12": "Enter Geofence",
