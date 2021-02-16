@@ -157,7 +157,7 @@ window.LanguagePackages= {
 
 
 		"PROMPT_MSG031": "At least one option should be selected.",
-		"PROMPT_MSG032": "Set Overspeed Value(km/h)",
+		"PROMPT_MSG032": "Set Overspeed Value",
 		"PROMPT_MSG033": "Notification will be sent, if asset will be offline for certain period of time.",
 		"PROMPT_MSG034": "Over Road Speed - Notification will be sent, if asset exceed the allowed speed of the road.",
 		"PROMPT_MSG035": "Over Set Speed - Notification will be sent, if asset exceed presetted speed.",
@@ -361,7 +361,7 @@ window.LanguagePackages= {
 		"ASSET_ALARM_MSG06": "Alarms",
 		"ASSET_ALARM_MSG07": "Tilt / Shock",
 		"ASSET_ALARM_MSG08": "Impact / Crash",
-		"ASSET_ALARM_MSG39": "Power Disconnection",
+		"ASSET_ALARM_MSG09": "Power Disconnection",
 		"ASSET_ALARM_MSG10": "Ignition Off",
 		"ASSET_ALARM_MSG11": "Ignition On",
 		"ASSET_ALARM_MSG12": "Enter Geofence",

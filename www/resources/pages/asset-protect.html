@@ -29,7 +29,7 @@
         </div>
         {{/if}}-->
 
-        <div class="toolbar toolbar-bottom no-border {{#if ShowPayment}}toolbar-size-3{{/if}}">
+        <div class="toolbar toolbar-bottom no-border {{#if ShowPayment}}toolbar-size-3{{else}}toolbar-size-1{{/if}}">
             <div class="toolbar-inner flex-direction-column bg-color-white no-padding ">
                 {{#if ShowPayment}}
                 <div class="width-100 ">
@@ -37,7 +37,7 @@
                 </div>
                 {{/if}}
                 <div class="width-100 ">
-                    <a href="/report-theft/?imei={{IMEI}}" class="link button button-fill color-darkgray col-100 margin-horizontal margin-bottom"><i class="f7-icons icon-live-report-thief margin-right"></i> {{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG07}}</a>
+                    <a href="/report-theft/?imei={{IMEI}}" class="link button button-fill color-darkgray col-100 margin-horizontal margin-top margin-bottom"><i class="f7-icons icon-live-report-thief margin-right"></i> {{@global.LANGUAGE.ASSET_STATUS_LIVE_MSG07}}</a>
                 </div>
             </div>
         </div>

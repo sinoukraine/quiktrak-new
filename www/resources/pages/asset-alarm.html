@@ -289,6 +289,9 @@
             let index = IMEI.indexOf(',');
             let tabsFlag = self.$route.query.tabs;
 
+            let maxSpeedUnit = index === -1 ? assetList[IMEI].Unit : assetList[IMEI.split(',')[0]].Unit;
+            let maxSpeed = index === -1 ? assetList[IMEI].MaxSpeed : 80; //index === -1 ? Protocol.Helper.getSpeedValue(maxSpeedUnit, asset.MaxSpeed);
+
             let ret = {
                 Tabs: !!tabsFlag,
                 AlarmListType: 3,
@@ -301,7 +304,8 @@
                 },
                 IMEI: IMEI,
                 Name: index === -1 ? assetList[IMEI].Name : LANGUAGE.ASSET_ALARM_MSG00,
-                MaxSpeed: index === -1 ? assetList[IMEI].MaxSpeed : 80,
+                MaxSpeedUnit: maxSpeedUnit,
+                MaxSpeed: Protocol.Helper.getSpeedValue(maxSpeedUnit, maxSpeed),
                 isPositiveInputSupported: index === -1 ? (parseInt(assetList[IMEI]._FIELD_INT2) & Protocol.FeaturesEnum.PositiveInput) > 0 : (parseInt(assetList[IMEI.split(',')[0]]._FIELD_INT2) & Protocol.FeaturesEnum.PositiveInput) > 0,
 
                 ShowAdditionalBlocks: false,
@@ -953,7 +957,7 @@
                                     {
                                         state: true,
                                         val: 4,
-                                        title: LANGUAGE.ASSET_ALARM_MSG09, //power
+                                        title: LANGUAGE.ASSET_ALARM_MSG39, //power
                                     },
                                 ];
                             }else{
@@ -1094,7 +1098,7 @@
                 let self = this;
 
                 let text = `
-					<div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG032 }:</div>
+					<div class="custom-modal-text">${ LANGUAGE.PROMPT_MSG032 }(${Protocol.Helper.getSpeedUnit(self.MaxSpeedUnit)}):</div>
 					<div class="dialog-input-field item-input">
 						<div class="item-input-wrap">
 							<input type="text" class="dialog-input" name="MaxSpeed" value="${ self.MaxSpeed }">
@@ -1226,7 +1230,7 @@
                             if (!(data.AlertTypes & 32) && page.$el.find('input[name="overspeed-type"]:checked').val()) {
                                 data.SpeedingMode = parseInt(page.$el.find('input[name="overspeed-type"]:checked').val(),10);
                                 if (data.SpeedingMode === 2) {
-                                    data.MaxSpeed = self.MaxSpeed;
+                                    data.MaxSpeed = Protocol.Helper.getSpeedValueInKM(self.MaxSpeedUnit, self.MaxSpeed);// self.MaxSpeed;
                                 }
                             }
 
