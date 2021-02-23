@@ -3120,6 +3120,25 @@ $$('body').on('change', '.leaflet-control-layers-selector', function(){
     app.methods.setInStorage({name: 'mapSettings', data: mapSettingsObg});
 });
 
+/*$$('body').on('click', '.test', function(){
+    let data = {
+        IMSI: 'self.imsi',
+        SMS: 'text'
+    };
+
+    app.request.promise.post("//api.m2mglobaltech.com/QuikData/v1/Command/Send", data, 'json')
+      .then(function (result) {
+          console.log(result)
+          if(result.data.MajorCode === '000') {
+
+          }
+      })
+      .catch(function (err) {
+          console.log(err);
+      });
+});*/
+
+
 /*$$('body').on('click', '.title', function(){
     app.dialog.alert(localStorage.PUSH_DEVICE_TOKEN)
 });*/

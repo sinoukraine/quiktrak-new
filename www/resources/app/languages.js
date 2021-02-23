@@ -396,6 +396,7 @@ window.LanguagePackages= {
 		"ASSET_ALARM_MSG41": "PTO Input Off",
 		"ASSET_ALARM_MSG42": "WiTi Armed",
 		"ASSET_ALARM_MSG43": "WiTi Disarmed",
+		"ASSET_ALARM_MSG44": "Fatigue Driving",
 
 		"GEOFENCES_MSG00": "Circle",
 		"GEOFENCES_MSG01": "Polygon",
